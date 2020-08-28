@@ -44,10 +44,10 @@ function remTime(){
 chatForm.addEventListener('submit', e => {
     e.preventDefault()
     const msg = e.target.elements[0].value;
-    
+
     if(currentPlayer !== name && guessWord){
 
-        if(msg === guessWord && !playersDB[name].guessed){
+        if(msg.trim().toLowerCase() === guessWord && !playersDB[name].guessed){
             socket.emit('guessed', name)
         } else
             socket.emit('chatMsg', msg);
