@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketch | Room</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" 
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" 
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="userList">
+        <div id="timer"><i class="fa fa-paint-brush" aria-hidden="true"></i> <span id="time">80</span></div>
+        <div class="au">Active Users</div>
+        <div class="activeUsers"></div>
+    </div>
+    <div class="board">
+        <div class="canvasDisplay">
+            <div class="round"></div>
+            <div class="canvasInfo"></div>
+            <div class="wordLength"></div>
+        </div>
+        <canvas id="canvas"></canvas>
+        <div class="canvasElements">
+            <div>Brush Stroke</div>
+            <input id="strokeWeight" type="text" value="1">
+            <div class="colorPlate">
+                <div style="background-color: black;" class="square" onclick="penColor(this)"></div>
+                <div style="background-color: red;" class="square" onclick="penColor(this)"></div>
+                <div style="background-color: blue;" class="square" onclick="penColor(this)"></div>
+                <div style="background-color: yellow;" class="square" onclick="penColor(this)"></div>
+                <div style="background-color: green;" class="square" onclick="penColor(this)"></div>
+            </div>
+            <button class="chooseBtn" onclick="enterWord()">Enter Word</button>
+        </div>
+        <div>
+            <button class="clearBtn" onclick="clearCanvas()">Clear Board</button>
+        </div>
+    </div>
+    <div class="chatArea">
+        <div class="chatHeading">Chat Box</div>
+        <div class="chatInbox"></div>
+        <div class="inputs">
+            <form id="chatForm">
+                <input class="inp" type="text" placeholder="Enter Your Guess Here" required autocomplete="off"/>
+                <button class="sendBtn">Enter</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" 
+    integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w==" 
+    crossorigin="anonymous"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/client.js"></script>
+</body>
+</html>
