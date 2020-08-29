@@ -9,6 +9,7 @@ const canvasInfo = document.querySelector('.board .canvasDisplay .canvasInfo')
 const canvasElements = document.querySelector('.board .canvasElements')
 const wordDisp = document.querySelector('.board .canvasDisplay .wordLength')
 const roundDisp = document.querySelector('.board .canvasDisplay .round')
+const wordForm = document.getElementById('wordForm')
 
 let time = 80;
 let painting = false;
@@ -72,6 +73,21 @@ strokeInp.addEventListener('change', e => {
     }
 })
 
+wordForm.addEventListener('submit', e => {
+    e.preventDefault()
+    let word = e.target[0].value
+    if(word){
+        word = word.trim().toLowerCase()
+        guessWord = word
+        socket.emit('word', guessWord)
+        remTime()
+        game = true
+        document.getElementById('modal').style.visibility = 'hidden'
+    }
+    e.target[0].value = ''
+})
+
+
 function penColor(elt){
     strokeColor = elt.style.backgroundColor;
 }
@@ -79,13 +95,11 @@ function penColor(elt){
 
 function enterWord(){
     if(currentPlayer === name && !guessWord && players.length > 1){
-        let word = prompt('Enter a meaningful word')
-        word = word.trim().toLowerCase()
-        if(word){
-            guessWord = word
-            socket.emit('word', guessWord)
-            remTime()
-            game = true
+        if(document.getElementById('modal').style.visibility === 'visible')
+            document.getElementById('modal').style.visibility = 'hidden'
+        else {
+            document.getElementById('modal').style.visibility = 'visible'
+            document.querySelector('#wordForm .wordInp').focus()
         }
     }
 }

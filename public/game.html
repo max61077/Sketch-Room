@@ -15,6 +15,16 @@
         <div class="au">Active Users</div>
         <div class="activeUsers"></div>
     </div>
+    <div id="modal">
+        <div class="modalH">
+            <h1>Enter Word</h1>
+            <span id="close" onclick="enterWord()">&times;</span>
+        </div>
+        <form id="wordForm">
+            <input class="wordInp" type="text" maxlength="10" required placeholder="Enter a meaningful Word"/>
+            <input type="submit" value="ENTER" class="wordBtn"/>
+        </form>
+    </div>
     <div class="board">
         <div class="canvasDisplay">
             <div class="round"></div>

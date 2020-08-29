@@ -14,7 +14,6 @@ body{
 }
 
 #timer{
-    /* text-align: center; */
     font-size: 25px;
     color: red;
     padding: 7px;
@@ -55,6 +54,61 @@ i{
 
 .us{
     color: lightgreen;
+}
+
+#modal{
+    width: 35vw;
+    height: 15vw;
+    background-color: rgba(255, 255, 255, 0.59);
+    position: absolute;
+    align-self: center;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    align-items: center;
+    color: darkslategray;
+    border: 1px solid lightgrey;
+    border-radius: 20px;
+}
+
+.modalH{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#close{
+    font-size: 50px;
+    position: absolute;
+    right: 20px;
+}
+
+#close:hover{
+    cursor: pointer;
+}
+
+#wordForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#wordForm .wordInp{
+    width: 30vw;
+    height: 5vh;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+#wordForm .wordBtn{
+    width: 10vw;
+    height: 5vh;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    border: none;
 }
 
 .board{
@@ -219,6 +273,33 @@ canvas{
 
     .activeUsers{
         overflow-y: scroll;
+    }
+
+    #modal{
+        width: 200px;
+        height: 120px;
+        top: 20px;
+    }
+
+    #modal .modalH{
+        font-size: 8px;
+    }
+
+    #close{
+        font-size: 20px;
+        right: 15px;
+        top: 5px;
+    }
+
+    #wordForm .wordInp{
+        height: 25px;
+        font-size: 8px;
+        margin-bottom: 10px;
+    }
+
+    #wordForm .wordBtn{
+        width: 60px;
+        font-size: 10px;
     }
 
     .board{
