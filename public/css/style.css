@@ -111,6 +111,62 @@ i{
     border: none;
 }
 
+.guessWordDisp{
+    width: 30vw;
+    height: 20vh;
+    border: 1px solid lightgrey;
+    border-radius: 40px;
+    background-color: white;
+    position: absolute;
+    text-align: center;
+    top: 100px;
+    display: none;
+}
+
+.guessWordDisp p{
+    color: darkslategrey;
+    font-size: 20px;
+}
+
+.guessWordDisp #guessWord{
+    color: tomato;
+    text-transform: capitalize;
+}
+
+.winner{
+    width: 25vw;
+    height: 25vh;
+    border: 1px solid lightgrey;
+    border-radius: 40px;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    top: 100px;
+    text-transform: capitalize;
+    visibility: hidden;
+}
+
+.winner .h {
+    color: dodgerblue;
+    font-size: 27px;
+}
+
+.winner .win{
+    font-size: 30px;
+    color: red;
+}
+
+.winner a{
+    text-decoration: none;
+    color: darkslategrey;
+    padding: 15px;
+}
+
+
+
 .board{
     border: 1px solid lightgrey;
     padding: 10px;
@@ -151,9 +207,6 @@ canvas{
     margin-top: 5px;
     background-color: white;
 }
-
-/* canvas:hover{
-} */
 
 .board .canvasElements{
     display: flex;
@@ -300,6 +353,32 @@ canvas{
     #wordForm .wordBtn{
         width: 60px;
         font-size: 10px;
+    }
+
+    .guessWordDisp{
+        top: 50px;
+        font-size: 7px;
+        width: 200px;
+        height: 110px;
+    }
+
+    .guessWordDisp #guessWord{
+        font-size: 20px;
+    }
+
+    .winner{
+        width: 200px;
+        height: 100px;
+        top: 25px;
+    }
+
+    .winner .h{
+        font-size: 14px;
+        margin-top: 7px;
+    }
+
+    .winner .win{
+        font-size: 16px;
     }
 
     .board{

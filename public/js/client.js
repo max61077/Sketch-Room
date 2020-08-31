@@ -74,15 +74,21 @@ socket.on('chatMsg', userMsg => {
     chatMsg.scrollTop = chatMsg.scrollHeight
 })
 
-socket.on('nextTurn', nextPlayer => {
-    currentPlayer = nextPlayer.player;
-    rounds = nextPlayer.rounds
-    roundDisp.innerHTML = 'Round: ' + (maxRounds - rounds + 1)
-    if(currentPlayer === name)
-        canvasInfo.innerHTML = 'your turn'
-    else
-        canvasInfo.innerHTML = `${currentPlayer}'s turn`
-    reset()
+socket.on('nextTurn', async nextPlayer => {
+
+        guessWordDisp.children[1].innerHTML = guessWord
+        guessWordDisp.style.display = 'block'
+
+        await sleep(3300)
+
+        currentPlayer = nextPlayer.player;
+        rounds = nextPlayer.rounds
+        roundDisp.innerHTML = 'Round: ' + (maxRounds - rounds + 1)
+        if(currentPlayer === name)
+            canvasInfo.innerHTML = 'your turn'
+        else
+            canvasInfo.innerHTML = `${currentPlayer}'s turn`
+        reset()
 })
 
 socket.on('timer', time => {
@@ -100,10 +106,9 @@ socket.on('word', word => {
 socket.on('guessed', name => {
 
     playersDB[name].guessed = true
-    playersDB[name].score += 100;
+    playersDB[name].score += Math.floor((120 * guessWord.length) / players.length);
 
-    if(checkAllGuessed())
-        playersDB[currentPlayer].score += 50
+    playersDB[currentPlayer].score += Math.floor((70 * guessWord.length) / (1.5 * players.length))
 
     const message = document.createElement('div')
     message.classList = 'guessed';
@@ -115,10 +120,13 @@ socket.on('guessed', name => {
 })
 
 socket.on('gameover', () => {
+
+    dispWinner.style.visibility = 'visible';
+
     if(checkWinner())
-        canvasInfo.innerHTML = 'Winner: ' + checkWinner().bold()
+        dispWinner.children[1].innerHTML = 'Winner: ' + checkWinner().bold()
     else
-        canvasInfo.innerHTML = 'Match Drawn'
+        dispWinner.children[1].innerHTML = 'Match Drawn'
         
     reset()
 })

@@ -10,6 +10,8 @@ const canvasElements = document.querySelector('.board .canvasElements')
 const wordDisp = document.querySelector('.board .canvasDisplay .wordLength')
 const roundDisp = document.querySelector('.board .canvasDisplay .round')
 const wordForm = document.getElementById('wordForm')
+const guessWordDisp = document.querySelector('.guessWordDisp')
+const dispWinner = document.querySelector('.winner')
 
 let time = 80;
 let painting = false;
@@ -116,6 +118,7 @@ function reset(){
     for(let i in playersDB)
         playersDB[i].guessed = false
     wordDisp.innerHTML = ''
+    guessWordDisp.style.display = 'none'
 }
 
 function userDetails(users){
@@ -163,4 +166,8 @@ function wordLength(word){
             codedStr += "__ "
     
     return codedStr
+}
+
+function sleep(ms){
+    return new Promise(res => setTimeout(res, ms))
 }
