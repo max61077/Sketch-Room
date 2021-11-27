@@ -1,7 +1,8 @@
 const socket = io();
-const {name, room} = Qs.parse(location.search, {ignoreQueryPrefix: true})
+const {name: username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true})
+const userName = username.toLowerCase()
 
-socket.emit('userJoin', {name, room})
+socket.emit('userJoin', {userName, room})
 
 socket.on('msg', msg => {
     const message = document.createElement('div')
@@ -23,7 +24,7 @@ socket.on('conn', ({users, userLeft}) => {
         if(users.length === 1){
             canvasInfo.innerHTML = 'Waiting for Other Player to Join'
         } else {
-            if(currentPlayer === name)
+            if(currentPlayer === userName)
                 canvasInfo.innerHTML = 'your turn'
             else
                 canvasInfo.innerHTML = `${currentPlayer}'s turn`
@@ -84,7 +85,7 @@ socket.on('nextTurn', async nextPlayer => {
         currentPlayer = nextPlayer.player;
         rounds = nextPlayer.rounds
         roundDisp.innerHTML = 'Round: ' + (maxRounds - rounds + 1)
-        if(currentPlayer === name)
+        if(currentPlayer === userName)
             canvasInfo.innerHTML = 'your turn'
         else
             canvasInfo.innerHTML = `${currentPlayer}'s turn`
@@ -97,7 +98,7 @@ socket.on('timer', time => {
 
 socket.on('word', word => {
     guessWord = word
-    if(currentPlayer === name)
+    if(currentPlayer === userName)
         wordDisp.innerHTML = word
     else
         wordDisp.innerHTML = wordLength(word)
@@ -145,7 +146,7 @@ function finishPosition(){
 function draw(e){
     if(!painting) return;
 
-    if(game && currentPlayer === name){
+    if(game && currentPlayer === userName){
 
         ctx.lineWidth = strokeWeight;
         ctx.strokeStyle = strokeColor;
@@ -155,7 +156,7 @@ function draw(e){
         ctx.beginPath()
         ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop)
     
-        socket.emit('drawing', {name, x: e.clientX - canvas.offsetLeft, y: e.clientY - canvas.offsetTop, painting, strokeWeight, strokeColor})
+        socket.emit('drawing', {name: userName, x: e.clientX - canvas.offsetLeft, y: e.clientY - canvas.offsetTop, painting, strokeWeight, strokeColor})
     }
 }
 

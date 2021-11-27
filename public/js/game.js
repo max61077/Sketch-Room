@@ -25,7 +25,7 @@ let game = false, rounds = 5, maxRounds = 5, guessWord, interval;
 let players = [], currentPlayer, playersDB = {};
 
 function clearCanvas(){
-    if(game && currentPlayer === name){
+    if(game && currentPlayer === userName){
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         socket.emit('clear')
     }
@@ -48,10 +48,10 @@ chatForm.addEventListener('submit', e => {
     e.preventDefault()
     const msg = e.target.elements[0].value;
 
-    if(currentPlayer !== name && guessWord){
+    if(currentPlayer !== userName && guessWord){
 
-        if(msg.trim().toLowerCase() === guessWord && !playersDB[name].guessed){
-            socket.emit('guessed', name)
+        if(msg.trim().toLowerCase() === guessWord.toLowerCase() && !playersDB[userName].guessed){
+            socket.emit('guessed', userName.toLowerCase())
         } else
             socket.emit('chatMsg', msg);
 
@@ -65,7 +65,7 @@ chatForm.addEventListener('submit', e => {
 })
 
 strokeInp.addEventListener('change', e => {
-    if(currentPlayer === name){
+    if(currentPlayer === userName){
         const val = e.target.value
         if(val && val > 0 && val < 11 && !isNaN(val)){
             strokeWeight = val;
@@ -96,7 +96,7 @@ function penColor(elt){
 
 
 function enterWord(){
-    if(currentPlayer === name && !guessWord && players.length > 1){
+    if(currentPlayer === userName && !guessWord && players.length > 1){
         if(document.getElementById('modal').style.visibility === 'visible')
             document.getElementById('modal').style.visibility = 'hidden'
         else {

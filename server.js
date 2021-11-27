@@ -14,8 +14,8 @@ server.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
 
 
 io.on('connection', socket => {
-    socket.on('userJoin', ({name, room}) => {
-        const user = userJoin(socket.id, name, room);
+    socket.on('userJoin', ({userName, room}) => {
+        const user = userJoin(socket.id, userName, room);
 
         if(user){
             socket.join(user.room)
